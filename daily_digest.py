@@ -125,6 +125,53 @@ QUOTES = [
     ("The secret of getting ahead is getting started.", "Mark Twain"),
 ]
 
+JOKES = {
+    "animals": [
+        "What do you call a fish with no eyes? A fsh.",
+        "What do you call a bear with no teeth? A gummy bear.",
+        "Why don't cows have any money? Farmers milk them dry.",
+        "What do you call a dog that does magic? A labracadabrador.",
+        "Why did the chicken join a band? It already had the drumsticks.",
+    ],
+    "food": [
+        "Why don't eggs tell jokes? They'd crack each other up.",
+        "What do you call cheese that isn't yours? Nacho cheese.",
+        "I'm on a seafood diet. I see food and I eat it.",
+        "Why did the coffee file a police report? It got mugged.",
+        "Why did the tomato turn red? It saw the salad dressing.",
+        "What do you call a fake noodle? An impasta.",
+    ],
+    "science": [
+        "I'm reading a book about anti-gravity. It's impossible to put down.",
+        "Did you hear about the claustrophobic astronaut? He just needed a little space.",
+        "I would tell you a chemistry joke, but I know I wouldn't get a reaction.",
+        "What do you call an acid with an attitude? A-mean-o acid.",
+        "Why can't you trust an atom? They make up everything.",
+    ],
+    "tech": [
+        "Why do programmers prefer dark mode? Light attracts bugs.",
+        "Why was the computer cold? It left its Windows open.",
+        "How many programmers does it take to change a light bulb? None, that's a hardware problem.",
+        "Why did the developer go broke? He used up all his cache.",
+        "I'd tell you a UDP joke, but you might not get it.",
+    ],
+    "work": [
+        "I used to be a banker, but I lost interest.",
+        "I used to work at a calendar factory, but I got fired for taking a couple of days off.",
+        "My boss told me to have a good day, so I went home.",
+    ],
+    "wordplay": [
+        "Why don't skeletons fight each other? They don't have the guts.",
+        "Why did the scarecrow win an award? He was outstanding in his field.",
+        "Why did the bicycle fall over? It was two-tired.",
+        "I only know 25 letters of the alphabet. I don't know y.",
+        "Why can't your nose be 12 inches long? Because then it would be a foot.",
+        "What did the ocean say to the beach? Nothing, it just waved.",
+        "I'm afraid for the calendar. Its days are numbered.",
+        "What do you call a belt made of watches? A waist of time.",
+    ],
+}
+
 
 def _daily_rng(section: str) -> random.Random:
     """A random.Random seeded by (today's date, section name).
@@ -146,6 +193,11 @@ def daily_tip() -> str:
 
 def daily_quote() -> tuple[str, str]:
     return _daily_rng("quote").choice(QUOTES)
+
+
+def daily_joke() -> str:
+    pool = [joke for jokes in JOKES.values() for joke in jokes]
+    return _daily_rng("joke").choice(pool)
 
 
 def fetch_breaking_news(count: int = NEWS_HEADLINE_COUNT) -> list[str]:
@@ -190,6 +242,11 @@ def main() -> None:
         print("-" * (16 + len(NEWS_SOURCE_NAME)))
         print(f"Couldn't fetch news right now ({exc}). Check your internet connection.")
         print()
+
+    print("Joke of the Day")
+    print("-" * 15)
+    print(daily_joke())
+    print()
 
     print("Tip of the Day")
     print("-" * 14)

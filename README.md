@@ -1,8 +1,10 @@
 # dad-joke-cli
 
-A command-line daily digest: 5 facts, 5 breaking headlines, a tip of the day, and a quote of the day.
+A command-line daily digest: 5 facts, 5 breaking headlines, a joke of the day, a tip of the day, and a quote of the day.
 
-Facts, the tip, and the quote are picked deterministically from the date - running it again later today shows the same picks, tomorrow shows a different set. No dependencies beyond the Python standard library, and no state file: the "today" set is derived from the date itself.
+Facts, the joke, the tip, and the quote are picked deterministically from the date - running it again later today shows the same picks, tomorrow shows a different set. No dependencies beyond the Python standard library, and no state file: the "today" set is derived from the date itself.
+
+The joke of the day is drawn from 32 dad jokes across six categories (animals, food, science, tech, work, wordplay) - the repo's original reason for existing, still here.
 
 Breaking news is fetched live from [BBC News](https://www.bbc.co.uk/news)'s public RSS feed, since real breaking news can't be curated offline - this is the one part of the tool that needs an internet connection. If the network is unavailable, that section prints a short notice and the rest of the digest (facts, tip, quote) still runs normally.
 
@@ -31,6 +33,10 @@ Breaking News (BBC News)
 1. ...
 ...
 
+Joke of the Day
+---------------
+Why don't skeletons fight each other? They don't have the guts.
+
 Tip of the Day
 --------------
 ...
@@ -40,3 +46,11 @@ Quote of the Day
 "..."
   - Author
 ```
+
+## Tests
+
+```bash
+python -m unittest
+```
+
+The suite covers the joke/fact/tip/quote picking, its day-to-day determinism, RSS parsing, and the offline fallback. It stubs the network, so it never makes a real request.
