@@ -1,0 +1,143 @@
+"""
+If Statements & For Loops Practice - Set 2
+---------------------------------------------
+Another batch of small examples using if/elif/else and for loops,
+different problems from the first set.
+Run with:  python if_for_practice_2.py
+"""
+
+# 1. Collatz conjecture step counter
+print("=== Collatz sequence lengths ===")
+for start in range(1, 16):
+    n = start
+    steps = 0
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        steps += 1
+    print(f"Start={start:2} -> {steps} steps to reach 1")
+
+
+# 2. Leap year checker over a range of years
+print("\n=== Leap years 2000-2028 ===")
+for year in range(2000, 2029):
+    if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
+        print(f"{year} is a leap year")
+
+
+# 3. Diamond pattern using nested loops
+print("\n=== Diamond pattern ===")
+size = 5
+for i in range(size):
+    spaces = " " * (size - i - 1)
+    stars = "*" * (2 * i + 1)
+    print(spaces + stars)
+for i in range(size - 2, -1, -1):
+    spaces = " " * (size - i - 1)
+    stars = "*" * (2 * i + 1)
+    print(spaces + stars)
+
+
+# 4. Categorize a list of temperatures
+print("\n=== Temperature categorizer (Fahrenheit) ===")
+temps = [102, 98.6, 55, 32, 0, -10, 75, 89]
+for t in temps:
+    if t >= 100:
+        category = "fever"
+    elif t >= 90:
+        category = "hot"
+    elif t >= 60:
+        category = "mild"
+    elif t >= 32:
+        category = "cold"
+    else:
+        category = "freezing"
+    print(f"{t:6}°F -> {category}")
+
+
+# 5. Run-length encoding of a string
+print("\n=== Run-length encoding ===")
+text = "aaabbbccccdaa"
+encoded = ""
+count = 1
+for i in range(1, len(text) + 1):
+    if i < len(text) and text[i] == text[i - 1]:
+        count += 1
+    else:
+        encoded += text[i - 1] + str(count)
+        count = 1
+print(f"Input:   {text}")
+print(f"Encoded: {encoded}")
+
+
+# 6. Palindrome checker for a list of words
+print("\n=== Palindrome checker ===")
+words = ["racecar", "hello", "level", "python", "noon", "deified"]
+for word in words:
+    is_palindrome = True
+    for i in range(len(word) // 2):
+        if word[i] != word[len(word) - 1 - i]:
+            is_palindrome = False
+            break
+    print(f"{word:10} -> {'palindrome' if is_palindrome else 'not a palindrome'}")
+
+
+# 7. Simple grid/matrix traversal, flag diagonal cells
+print("\n=== Matrix diagonal flagging ===")
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+]
+for r in range(len(matrix)):
+    row_display = []
+    for c in range(len(matrix[r])):
+        if r == c:
+            row_display.append(f"[{matrix[r][c]}]")
+        else:
+            row_display.append(f" {matrix[r][c]} ")
+    print(" ".join(row_display))
+
+
+# 8. Rock-paper-scissors outcome table
+print("\n=== Rock-paper-scissors outcomes ===")
+choices = ["rock", "paper", "scissors"]
+for p1 in choices:
+    for p2 in choices:
+        if p1 == p2:
+            result = "tie"
+        elif (
+            (p1 == "rock" and p2 == "scissors")
+            or (p1 == "paper" and p2 == "rock")
+            or (p1 == "scissors" and p2 == "paper")
+        ):
+            result = "player 1 wins"
+        else:
+            result = "player 2 wins"
+        print(f"{p1:10} vs {p2:10} -> {result}")
+
+
+# 9. Count how many years until an investment doubles (simple interest sim)
+print("\n=== Years to double an investment ===")
+rates = [2, 4, 6, 8, 10]
+for rate in rates:
+    balance = 1000.0
+    years = 0
+    while balance < 2000.0:
+        balance += balance * (rate / 100)
+        years += 1
+    print(f"At {rate}% annual growth: doubles in {years} years")
+
+
+# 10. Basic histogram from a list of values
+print("\n=== Histogram ===")
+dataset = [3, 7, 2, 8, 5, 7, 9, 1, 7, 4, 6, 7]
+for value in sorted(set(dataset)):
+    count = 0
+    for item in dataset:
+        if item == value:
+            count += 1
+    bar = "#" * count
+    print(f"{value:2} | {bar} ({count})")
